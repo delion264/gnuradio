@@ -66,7 +66,7 @@ blocks:
     start: '1'
     step: '1'
     stop: '10000'
-    value: '5'
+    value: '2'
     widget: counter_slider
   states:
     bus_sink: false
@@ -105,7 +105,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [760, 16.0]
+    coordinate: [736, 12.0]
     rotation: 0
     state: true
 - name: rx_delay
@@ -119,8 +119,8 @@ blocks:
     rangeType: int
     start: '10000000'
     step: '1'
-    stop: '20000000'
-    value: '12000000'
+    stop: '50000000'
+    value: '50000000'
     widget: counter_slider
   states:
     bus_sink: false
@@ -268,7 +268,7 @@ blocks:
     bus_structure: null
     coordinate: [1928, 344.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: blocks_complex_to_mag_1
   id: blocks_complex_to_mag
   parameters:
@@ -283,6 +283,38 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [2584, 320.0]
+    rotation: 0
+    state: disabled
+- name: blocks_complex_to_mag_1_0
+  id: blocks_complex_to_mag
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2592, 480.0]
+    rotation: 0
+    state: disabled
+- name: blocks_complex_to_mag_squared_0
+  id: blocks_complex_to_mag_squared
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2584, 400.0]
     rotation: 0
     state: true
 - name: blocks_delay_0
@@ -301,7 +333,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [840, 504.0]
+    coordinate: [728, 496.0]
     rotation: 0
     state: true
 - name: blocks_freqshift_cc_0
@@ -318,7 +350,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [896, 580.0]
+    coordinate: [856, 500.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_conjugate_cc_0
@@ -370,7 +402,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1032, 520.0]
+    coordinate: [1040, 512.0]
     rotation: 0
     state: true
 - name: blocks_stream_to_vector_1
@@ -605,6 +637,168 @@ blocks:
     coordinate: [1696, 24.0]
     rotation: 0
     state: disabled
+- name: qtgui_freq_sink_x_0
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'True'
+    average: '1.0'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    ctrlpanel: 'False'
+    fc: '0'
+    fftsize: '8192'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label: Relative Gain
+    label1: ''
+    label10: ''''''
+    label2: ''''''
+    label3: ''''''
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Multiply Conj Freq Domain"'
+    nconnections: '1'
+    norm_window: 'False'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: float
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: window.WIN_BLACKMAN_hARRIS
+    ymax: '10'
+    ymin: '-140'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2128, 212.0]
+    rotation: 0
+    state: true
+- name: qtgui_freq_sink_x_0_0
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '0.1'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    ctrlpanel: 'False'
+    fc: '0'
+    fftsize: '8192'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label: Relative Gain
+    label1: ''
+    label10: ''''''
+    label2: ''''''
+    label3: ''''''
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"IFFT Freq Domain"'
+    nconnections: '1'
+    norm_window: 'False'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: float
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: window.WIN_BLACKMAN_hARRIS
+    ymax: '300'
+    ymin: '-50'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2816, 412.0]
+    rotation: 0
+    state: true
 - name: qtgui_time_sink_x_0
   id: qtgui_time_sink_x
   parameters:
@@ -814,7 +1008,7 @@ blocks:
     alpha7: '1.0'
     alpha8: '1.0'
     alpha9: '1.0'
-    autoscale: 'False'
+    autoscale: 'True'
     axislabels: 'True'
     color1: blue
     color10: dark blue
@@ -852,7 +1046,7 @@ blocks:
     marker7: '-1'
     marker8: '-1'
     marker9: '-1'
-    name: '"Multiply Conj Time"'
+    name: '"Multiply Conj Time Domain"'
     nconnections: '1'
     size: fft_size
     srate: samp_rate
@@ -895,7 +1089,7 @@ blocks:
     bus_structure: null
     coordinate: [2128, 308.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: qtgui_time_sink_x_2
   id: qtgui_time_sink_x
   parameters:
@@ -992,7 +1186,7 @@ blocks:
     bus_structure: null
     coordinate: [2768, 292.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: qtgui_waterfall_sink_x_0
   id: qtgui_waterfall_sink_x
   parameters:
@@ -1173,17 +1367,82 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2568, 416.0]
+    coordinate: [2584, 180.0]
     rotation: 0
-    state: true
+    state: disabled
+- name: qtgui_waterfall_sink_x_1_0
+  id: qtgui_waterfall_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '0'
+    color10: '0'
+    color2: '0'
+    color3: '0'
+    color4: '0'
+    color5: '0'
+    color6: '0'
+    color7: '0'
+    color8: '0'
+    color9: '0'
+    comment: ''
+    fc: '0'
+    fftsize: '8192'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: ''
+    int_max: '30'
+    int_min: '-120'
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Multiply Conj Waterfall"'
+    nconnections: '1'
+    showports: 'False'
+    type: float
+    update_time: '0.02'
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2128, 108.0]
+    rotation: 0
+    state: disabled
 
 connections:
 - [analog_frequency_modulator_fc_0, '0', qtgui_time_sink_x_0_0, '0']
 - [analog_frequency_modulator_fc_0, '0', qtgui_waterfall_sink_x_0, '0']
 - [analog_sig_source_x_0_1, '0', blocks_throttle_0, '0']
 - [analog_sig_source_x_1, '0', blocks_throttle_1, '0']
+- [blocks_complex_to_mag_0, '0', qtgui_freq_sink_x_0, '0']
 - [blocks_complex_to_mag_0, '0', qtgui_time_sink_x_1, '0']
+- [blocks_complex_to_mag_0, '0', qtgui_waterfall_sink_x_1_0, '0']
 - [blocks_complex_to_mag_1, '0', qtgui_time_sink_x_2, '0']
+- [blocks_complex_to_mag_1_0, '0', qtgui_freq_sink_x_0_0, '0']
+- [blocks_complex_to_mag_squared_0, '0', qtgui_freq_sink_x_0_0, '0']
 - [blocks_delay_0, '0', blocks_freqshift_cc_0, '0']
 - [blocks_freqshift_cc_0, '0', blocks_stream_to_vector_0_0, '0']
 - [blocks_multiply_conjugate_cc_0, '0', blocks_complex_to_mag_0, '0']
@@ -1200,6 +1459,8 @@ connections:
 - [blocks_vector_to_stream_0, '0', blocks_multiply_conjugate_cc_0, '0']
 - [blocks_vector_to_stream_0_0, '0', blocks_multiply_conjugate_cc_0, '1']
 - [blocks_vector_to_stream_1, '0', blocks_complex_to_mag_1, '0']
+- [blocks_vector_to_stream_1, '0', blocks_complex_to_mag_1_0, '0']
+- [blocks_vector_to_stream_1, '0', blocks_complex_to_mag_squared_0, '0']
 - [blocks_vector_to_stream_1, '0', qtgui_waterfall_sink_x_1, '0']
 - [fft_vxx_0, '0', blocks_vector_to_stream_0, '0']
 - [fft_vxx_1, '0', blocks_vector_to_stream_0_0, '0']

@@ -79,10 +79,10 @@ class chirp(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.samp_rate = samp_rate = 100000000
-        self.rx_delay = rx_delay = 12000000
+        self.rx_delay = rx_delay = 50000000
         self.fft_size = fft_size = 8192
         self.doppler_shift = doppler_shift = 0
-        self.chirp_rate = chirp_rate = 5
+        self.chirp_rate = chirp_rate = 2
         self.chirp_bw = chirp_bw = 2000000
 
         ##################################################
@@ -91,105 +91,22 @@ class chirp(gr.top_block, Qt.QWidget):
         self._samp_rate_range = Range(2000000, 100000000, 1, 100000000, 200)
         self._samp_rate_win = RangeWidget(self._samp_rate_range, self.set_samp_rate, "'samp_rate'", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._samp_rate_win)
-        self._rx_delay_range = Range(10000000, 20000000, 1, 12000000, 200)
+        self._rx_delay_range = Range(10000000, 50000000, 1, 50000000, 200)
         self._rx_delay_win = RangeWidget(self._rx_delay_range, self.set_rx_delay, "'rx_delay'", "counter_slider", int, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._rx_delay_win)
         self._doppler_shift_range = Range(-1000000, 1000000, 1, 0, 200)
         self._doppler_shift_win = RangeWidget(self._doppler_shift_range, self.set_doppler_shift, "'doppler_shift'", "counter_slider", int, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._doppler_shift_win)
-        self._chirp_rate_range = Range(1, 10000, 1, 5, 200)
+        self._chirp_rate_range = Range(1, 10000, 1, 2, 200)
         self._chirp_rate_win = RangeWidget(self._chirp_rate_range, self.set_chirp_rate, "'chirp_rate'", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._chirp_rate_win)
         self._chirp_bw_range = Range(10000, 20000000, 5, 2000000, 200)
         self._chirp_bw_win = RangeWidget(self._chirp_bw_range, self.set_chirp_bw, "'chirp_bw'", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._chirp_bw_win)
-        self.qtgui_waterfall_sink_x_1 = qtgui.waterfall_sink_c(
-            8192, #size
-            window.WIN_BLACKMAN_hARRIS, #wintype
-            0, #fc
-            samp_rate, #bw
-            "Cross correlation of TX with delayed RX", #name
-            1, #number of inputs
-            None # parent
-        )
-        self.qtgui_waterfall_sink_x_1.set_update_time(0.02)
-        self.qtgui_waterfall_sink_x_1.enable_grid(False)
-        self.qtgui_waterfall_sink_x_1.enable_axis_labels(True)
-
-
-
-        labels = ['', '', '', '', '',
-                  '', '', '', '', '']
-        colors = [0, 0, 0, 0, 0,
-                  0, 0, 0, 0, 0]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-                  1.0, 1.0, 1.0, 1.0, 1.0]
-
-        for i in range(1):
-            if len(labels[i]) == 0:
-                self.qtgui_waterfall_sink_x_1.set_line_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_waterfall_sink_x_1.set_line_label(i, labels[i])
-            self.qtgui_waterfall_sink_x_1.set_color_map(i, colors[i])
-            self.qtgui_waterfall_sink_x_1.set_line_alpha(i, alphas[i])
-
-        self.qtgui_waterfall_sink_x_1.set_intensity_range(-70, 30)
-
-        self._qtgui_waterfall_sink_x_1_win = sip.wrapinstance(self.qtgui_waterfall_sink_x_1.qwidget(), Qt.QWidget)
-
-        self.top_layout.addWidget(self._qtgui_waterfall_sink_x_1_win)
-        self.qtgui_time_sink_x_2 = qtgui.time_sink_f(
-            fft_size, #size
-            samp_rate, #samp_rate
-            "IFFT Time", #name
-            1, #number of inputs
-            None # parent
-        )
-        self.qtgui_time_sink_x_2.set_update_time(0.05)
-        self.qtgui_time_sink_x_2.set_y_axis(-1, 1e7)
-
-        self.qtgui_time_sink_x_2.set_y_label('Amplitude', "")
-
-        self.qtgui_time_sink_x_2.enable_tags(True)
-        self.qtgui_time_sink_x_2.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
-        self.qtgui_time_sink_x_2.enable_autoscale(True)
-        self.qtgui_time_sink_x_2.enable_grid(False)
-        self.qtgui_time_sink_x_2.enable_axis_labels(True)
-        self.qtgui_time_sink_x_2.enable_control_panel(False)
-        self.qtgui_time_sink_x_2.enable_stem_plot(False)
-
-
-        labels = ['Signal 1', 'Signal 2', 'Signal 3', 'Signal 4', 'Signal 5',
-            'Signal 6', 'Signal 7', 'Signal 8', 'Signal 9', 'Signal 10']
-        widths = [1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1]
-        colors = ['blue', 'red', 'green', 'black', 'cyan',
-            'magenta', 'yellow', 'dark red', 'dark green', 'dark blue']
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-            1.0, 1.0, 1.0, 1.0, 1.0]
-        styles = [1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1]
-        markers = [-1, -1, -1, -1, -1,
-            -1, -1, -1, -1, -1]
-
-
-        for i in range(1):
-            if len(labels[i]) == 0:
-                self.qtgui_time_sink_x_2.set_line_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_time_sink_x_2.set_line_label(i, labels[i])
-            self.qtgui_time_sink_x_2.set_line_width(i, widths[i])
-            self.qtgui_time_sink_x_2.set_line_color(i, colors[i])
-            self.qtgui_time_sink_x_2.set_line_style(i, styles[i])
-            self.qtgui_time_sink_x_2.set_line_marker(i, markers[i])
-            self.qtgui_time_sink_x_2.set_line_alpha(i, alphas[i])
-
-        self._qtgui_time_sink_x_2_win = sip.wrapinstance(self.qtgui_time_sink_x_2.qwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_time_sink_x_2_win)
         self.qtgui_time_sink_x_1 = qtgui.time_sink_f(
             fft_size, #size
             samp_rate, #samp_rate
-            "Multiply Conj Time", #name
+            "Multiply Conj Time Domain", #name
             1, #number of inputs
             None # parent
         )
@@ -200,7 +117,7 @@ class chirp(gr.top_block, Qt.QWidget):
 
         self.qtgui_time_sink_x_1.enable_tags(True)
         self.qtgui_time_sink_x_1.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
-        self.qtgui_time_sink_x_1.enable_autoscale(False)
+        self.qtgui_time_sink_x_1.enable_autoscale(True)
         self.qtgui_time_sink_x_1.enable_grid(False)
         self.qtgui_time_sink_x_1.enable_axis_labels(True)
         self.qtgui_time_sink_x_1.enable_control_panel(False)
@@ -234,6 +151,92 @@ class chirp(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_1_win = sip.wrapinstance(self.qtgui_time_sink_x_1.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_1_win)
+        self.qtgui_freq_sink_x_0_0 = qtgui.freq_sink_f(
+            8192, #size
+            window.WIN_BLACKMAN_hARRIS, #wintype
+            0, #fc
+            samp_rate, #bw
+            "IFFT Freq Domain", #name
+            1,
+            None # parent
+        )
+        self.qtgui_freq_sink_x_0_0.set_update_time(0.10)
+        self.qtgui_freq_sink_x_0_0.set_y_axis(-50, 300)
+        self.qtgui_freq_sink_x_0_0.set_y_label('Relative Gain', 'dB')
+        self.qtgui_freq_sink_x_0_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
+        self.qtgui_freq_sink_x_0_0.enable_autoscale(False)
+        self.qtgui_freq_sink_x_0_0.enable_grid(False)
+        self.qtgui_freq_sink_x_0_0.set_fft_average(0.1)
+        self.qtgui_freq_sink_x_0_0.enable_axis_labels(True)
+        self.qtgui_freq_sink_x_0_0.enable_control_panel(False)
+        self.qtgui_freq_sink_x_0_0.set_fft_window_normalized(False)
+
+
+        self.qtgui_freq_sink_x_0_0.set_plot_pos_half(not True)
+
+        labels = ['', '', '', '', '',
+            '', '', '', '', '']
+        widths = [1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1]
+        colors = ["blue", "red", "green", "black", "cyan",
+            "magenta", "yellow", "dark red", "dark green", "dark blue"]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0]
+
+        for i in range(1):
+            if len(labels[i]) == 0:
+                self.qtgui_freq_sink_x_0_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_freq_sink_x_0_0.set_line_label(i, labels[i])
+            self.qtgui_freq_sink_x_0_0.set_line_width(i, widths[i])
+            self.qtgui_freq_sink_x_0_0.set_line_color(i, colors[i])
+            self.qtgui_freq_sink_x_0_0.set_line_alpha(i, alphas[i])
+
+        self._qtgui_freq_sink_x_0_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0_0.qwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_freq_sink_x_0_0_win)
+        self.qtgui_freq_sink_x_0 = qtgui.freq_sink_f(
+            8192, #size
+            window.WIN_BLACKMAN_hARRIS, #wintype
+            0, #fc
+            samp_rate, #bw
+            "Multiply Conj Freq Domain", #name
+            1,
+            None # parent
+        )
+        self.qtgui_freq_sink_x_0.set_update_time(0.10)
+        self.qtgui_freq_sink_x_0.set_y_axis(-140, 10)
+        self.qtgui_freq_sink_x_0.set_y_label('Relative Gain', 'dB')
+        self.qtgui_freq_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
+        self.qtgui_freq_sink_x_0.enable_autoscale(True)
+        self.qtgui_freq_sink_x_0.enable_grid(False)
+        self.qtgui_freq_sink_x_0.set_fft_average(1.0)
+        self.qtgui_freq_sink_x_0.enable_axis_labels(True)
+        self.qtgui_freq_sink_x_0.enable_control_panel(False)
+        self.qtgui_freq_sink_x_0.set_fft_window_normalized(False)
+
+
+        self.qtgui_freq_sink_x_0.set_plot_pos_half(not True)
+
+        labels = ['', '', '', '', '',
+            '', '', '', '', '']
+        widths = [1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1]
+        colors = ["blue", "red", "green", "black", "cyan",
+            "magenta", "yellow", "dark red", "dark green", "dark blue"]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0]
+
+        for i in range(1):
+            if len(labels[i]) == 0:
+                self.qtgui_freq_sink_x_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_freq_sink_x_0.set_line_label(i, labels[i])
+            self.qtgui_freq_sink_x_0.set_line_width(i, widths[i])
+            self.qtgui_freq_sink_x_0.set_line_color(i, colors[i])
+            self.qtgui_freq_sink_x_0.set_line_alpha(i, alphas[i])
+
+        self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.qwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_freq_sink_x_0_win)
         self.fft_vxx_2 = fft.fft_vcc(fft_size, False, window.blackmanharris(fft_size), True, 2)
         self.fft_vxx_1 = fft.fft_vcc(fft_size, True, window.blackmanharris(fft_size), True, 2)
         self.fft_vxx_0 = fft.fft_vcc(fft_size, True, window.blackmanharris(fft_size), True, 2)
@@ -248,7 +251,7 @@ class chirp(gr.top_block, Qt.QWidget):
         self.blocks_multiply_conjugate_cc_0 = blocks.multiply_conjugate_cc(1)
         self.blocks_freqshift_cc_0 = blocks.rotator_cc(2.0*math.pi*doppler_shift/samp_rate)
         self.blocks_delay_0 = blocks.delay(gr.sizeof_gr_complex*1, rx_delay)
-        self.blocks_complex_to_mag_1 = blocks.complex_to_mag(1)
+        self.blocks_complex_to_mag_squared_0 = blocks.complex_to_mag_squared(1)
         self.blocks_complex_to_mag_0 = blocks.complex_to_mag(1)
         self.analog_sig_source_x_1 = analog.sig_source_f(samp_rate, analog.GR_SAW_WAVE, chirp_rate, chirp_bw, 0, 0)
 
@@ -257,8 +260,9 @@ class chirp(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.connect((self.analog_sig_source_x_1, 0), (self.blocks_throttle_1, 0))
+        self.connect((self.blocks_complex_to_mag_0, 0), (self.qtgui_freq_sink_x_0, 0))
         self.connect((self.blocks_complex_to_mag_0, 0), (self.qtgui_time_sink_x_1, 0))
-        self.connect((self.blocks_complex_to_mag_1, 0), (self.qtgui_time_sink_x_2, 0))
+        self.connect((self.blocks_complex_to_mag_squared_0, 0), (self.qtgui_freq_sink_x_0_0, 0))
         self.connect((self.blocks_delay_0, 0), (self.blocks_freqshift_cc_0, 0))
         self.connect((self.blocks_freqshift_cc_0, 0), (self.blocks_stream_to_vector_0_0, 0))
         self.connect((self.blocks_multiply_conjugate_cc_0, 0), (self.blocks_complex_to_mag_0, 0))
@@ -271,8 +275,7 @@ class chirp(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_vco_c_0, 0), (self.blocks_stream_to_vector_0, 0))
         self.connect((self.blocks_vector_to_stream_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
         self.connect((self.blocks_vector_to_stream_0_0, 0), (self.blocks_multiply_conjugate_cc_0, 1))
-        self.connect((self.blocks_vector_to_stream_1, 0), (self.blocks_complex_to_mag_1, 0))
-        self.connect((self.blocks_vector_to_stream_1, 0), (self.qtgui_waterfall_sink_x_1, 0))
+        self.connect((self.blocks_vector_to_stream_1, 0), (self.blocks_complex_to_mag_squared_0, 0))
         self.connect((self.fft_vxx_0, 0), (self.blocks_vector_to_stream_0, 0))
         self.connect((self.fft_vxx_1, 0), (self.blocks_vector_to_stream_0_0, 0))
         self.connect((self.fft_vxx_2, 0), (self.blocks_vector_to_stream_1, 0))
@@ -294,9 +297,9 @@ class chirp(gr.top_block, Qt.QWidget):
         self.analog_sig_source_x_1.set_sampling_freq(self.samp_rate)
         self.blocks_freqshift_cc_0.set_phase_inc(2.0*math.pi*self.doppler_shift/self.samp_rate)
         self.blocks_throttle_1.set_sample_rate(self.samp_rate)
+        self.qtgui_freq_sink_x_0.set_frequency_range(0, self.samp_rate)
+        self.qtgui_freq_sink_x_0_0.set_frequency_range(0, self.samp_rate)
         self.qtgui_time_sink_x_1.set_samp_rate(self.samp_rate)
-        self.qtgui_time_sink_x_2.set_samp_rate(self.samp_rate)
-        self.qtgui_waterfall_sink_x_1.set_frequency_range(0, self.samp_rate)
 
     def get_rx_delay(self):
         return self.rx_delay
