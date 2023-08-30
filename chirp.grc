@@ -119,7 +119,7 @@ blocks:
     rangeType: int
     start: '10000000'
     step: '1'
-    stop: '50000000'
+    stop: '100000000'
     value: '50000000'
     widget: counter_slider
   states:
@@ -268,7 +268,7 @@ blocks:
     bus_structure: null
     coordinate: [1928, 344.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_complex_to_mag_1
   id: blocks_complex_to_mag
   parameters:
@@ -282,23 +282,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2584, 320.0]
-    rotation: 0
-    state: disabled
-- name: blocks_complex_to_mag_1_0
-  id: blocks_complex_to_mag
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [2592, 480.0]
+    coordinate: [2584, 296.0]
     rotation: 0
     state: disabled
 - name: blocks_complex_to_mag_squared_0
@@ -314,7 +298,23 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2584, 400.0]
+    coordinate: [2576, 448.0]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_mag_squared_0_0
+  id: blocks_complex_to_mag_squared
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1920, 288.0]
     rotation: 0
     state: true
 - name: blocks_delay_0
@@ -369,6 +369,42 @@ blocks:
     coordinate: [1720, 432.0]
     rotation: 0
     state: enabled
+- name: blocks_nlog10_ff_0
+  id: blocks_nlog10_ff
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '20'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2784, 444.0]
+    rotation: 0
+    state: enabled
+- name: blocks_nlog10_ff_0_0
+  id: blocks_nlog10_ff
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '20'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2144, 244.0]
+    rotation: 0
+    state: disabled
 - name: blocks_stream_to_vector_0
   id: blocks_stream_to_vector
   parameters:
@@ -471,7 +507,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_rate: samp_rate
-    sensitivity: '2'
+    sensitivity: '1'
   states:
     bus_sink: false
     bus_source: false
@@ -653,7 +689,7 @@ blocks:
     alpha8: '1.0'
     alpha9: '1.0'
     autoscale: 'True'
-    average: '1.0'
+    average: '0.1'
     axislabels: 'True'
     bw: samp_rate
     color1: '"blue"'
@@ -715,10 +751,91 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2128, 212.0]
+    coordinate: [2128, 132.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: qtgui_freq_sink_x_0_0
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '0.1'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    ctrlpanel: 'False'
+    fc: '0'
+    fftsize: '16384'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label: Relative Gain
+    label1: ''
+    label10: ''''''
+    label2: ''''''
+    label3: ''''''
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"20log10(|fft|^2) post IFFT"'
+    nconnections: '1'
+    norm_window: 'False'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: float
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: window.WIN_BLACKMAN_hARRIS
+    ymax: '300'
+    ymin: '-50'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2912, 420.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_freq_sink_x_0_0_0
   id: qtgui_freq_sink_x
   parameters:
     affinity: ''
@@ -768,7 +885,7 @@ blocks:
     legend: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
-    name: '"IFFT Freq Domain"'
+    name: '"20log10(|fft|^2) pre IFFT"'
     nconnections: '1'
     norm_window: 'False'
     showports: 'False'
@@ -796,9 +913,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2816, 412.0]
+    coordinate: [2304, 220.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: qtgui_time_sink_x_0
   id: qtgui_time_sink_x
   parameters:
@@ -1046,7 +1163,7 @@ blocks:
     marker7: '-1'
     marker8: '-1'
     marker9: '-1'
-    name: '"Multiply Conj Time Domain"'
+    name: '"Time Domain pre IFFT"'
     nconnections: '1'
     size: fft_size
     srate: samp_rate
@@ -1062,13 +1179,13 @@ blocks:
     style8: '1'
     style9: '1'
     tr_chan: '0'
-    tr_delay: '0'
+    tr_delay: '0.0'
     tr_level: '0.0'
     tr_mode: qtgui.TRIG_MODE_FREE
     tr_slope: qtgui.TRIG_SLOPE_POS
     tr_tag: '""'
     type: float
-    update_time: '0.05'
+    update_time: '0.01'
     width1: '1'
     width10: '1'
     width2: '1'
@@ -1160,12 +1277,12 @@ blocks:
     style9: '1'
     tr_chan: '0'
     tr_delay: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_level: 6e6
+    tr_mode: qtgui.TRIG_MODE_AUTO
     tr_slope: qtgui.TRIG_SLOPE_POS
     tr_tag: '""'
     type: float
-    update_time: '0.05'
+    update_time: '0.07'
     width1: '1'
     width10: '1'
     width2: '1'
@@ -1184,7 +1301,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2768, 292.0]
+    coordinate: [2904, 308.0]
     rotation: 0
     state: disabled
 - name: qtgui_waterfall_sink_x_0
@@ -1428,7 +1545,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2128, 108.0]
+    coordinate: [2128, 20.0]
     rotation: 0
     state: disabled
 
@@ -1440,13 +1557,19 @@ connections:
 - [blocks_complex_to_mag_0, '0', qtgui_freq_sink_x_0, '0']
 - [blocks_complex_to_mag_0, '0', qtgui_time_sink_x_1, '0']
 - [blocks_complex_to_mag_0, '0', qtgui_waterfall_sink_x_1_0, '0']
+- [blocks_complex_to_mag_1, '0', qtgui_freq_sink_x_0_0, '0']
 - [blocks_complex_to_mag_1, '0', qtgui_time_sink_x_2, '0']
-- [blocks_complex_to_mag_1_0, '0', qtgui_freq_sink_x_0_0, '0']
-- [blocks_complex_to_mag_squared_0, '0', qtgui_freq_sink_x_0_0, '0']
+- [blocks_complex_to_mag_squared_0, '0', blocks_nlog10_ff_0, '0']
+- [blocks_complex_to_mag_squared_0, '0', qtgui_time_sink_x_2, '0']
+- [blocks_complex_to_mag_squared_0_0, '0', blocks_nlog10_ff_0_0, '0']
+- [blocks_complex_to_mag_squared_0_0, '0', qtgui_time_sink_x_1, '0']
 - [blocks_delay_0, '0', blocks_freqshift_cc_0, '0']
 - [blocks_freqshift_cc_0, '0', blocks_stream_to_vector_0_0, '0']
 - [blocks_multiply_conjugate_cc_0, '0', blocks_complex_to_mag_0, '0']
+- [blocks_multiply_conjugate_cc_0, '0', blocks_complex_to_mag_squared_0_0, '0']
 - [blocks_multiply_conjugate_cc_0, '0', blocks_stream_to_vector_1, '0']
+- [blocks_nlog10_ff_0, '0', qtgui_freq_sink_x_0_0, '0']
+- [blocks_nlog10_ff_0_0, '0', qtgui_freq_sink_x_0_0_0, '0']
 - [blocks_stream_to_vector_0, '0', fft_vxx_0, '0']
 - [blocks_stream_to_vector_0_0, '0', fft_vxx_1, '0']
 - [blocks_stream_to_vector_1, '0', fft_vxx_2, '0']
@@ -1459,7 +1582,6 @@ connections:
 - [blocks_vector_to_stream_0, '0', blocks_multiply_conjugate_cc_0, '0']
 - [blocks_vector_to_stream_0_0, '0', blocks_multiply_conjugate_cc_0, '1']
 - [blocks_vector_to_stream_1, '0', blocks_complex_to_mag_1, '0']
-- [blocks_vector_to_stream_1, '0', blocks_complex_to_mag_1_0, '0']
 - [blocks_vector_to_stream_1, '0', blocks_complex_to_mag_squared_0, '0']
 - [blocks_vector_to_stream_1, '0', qtgui_waterfall_sink_x_1, '0']
 - [fft_vxx_0, '0', blocks_vector_to_stream_0, '0']
